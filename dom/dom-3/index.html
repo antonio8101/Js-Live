@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-3</title>
+</head>
+<body>
+<h1>Things to do</h1>
+<ol id="toDoList">test
+    <li class="important" about="something">Mow the lawn</li>
+    <li>Clean the windows</li>
+    <li class="important">Answer your email</li>
+    <strong>fkfkfk</strong>
+</ol>
+<p id="toDoNotes">Make sure all these are game on TV!</p>
+
+<script>
+    (function() {
+        // most used..
+        let olElement = document.getElementById("toDoList");
+
+        const elements = [];
+        olElement.childNodes.forEach(node =>{
+            if (node.nodeType === 1){
+                elements.push(node);
+            }
+        });
+
+        //alert("The ordered list contains " + count + " items...");
+        //console.log(olElement.firstChild);
+        var firstNode = elements[1];
+        console.log(firstNode);
+        console.log(olElement.childNodes[1].nodeName);
+        console.log(olElement.childNodes[2].nodeName);
+        elements[0].innerHTML = "First element";
+
+        // ottiene tutti gli elementi che sono corrispondenti al tag li
+        const listElements = document.getElementsByTagName("li");
+        console.log(listElements);
+        console.log(listElements.item(1));
+
+        const classElements = document.getElementsByClassName("important");
+        console.log(classElements);
+
+        const element = classElements.item(0);
+        const attribute = element.getAttribute("about");
+        console.log(attribute);
+
+        const el = document.querySelector("li.important[about]");
+        console.log(el.getAttribute("about"))
+
+        olElement = document.getElementById("toDoList");
+        const elementByClassName = document.querySelectorAll("#toDoList").item(0);
+        console.log(elementByClassName);
+        const elementById = document.querySelector("#toDoList");
+        console.log(elementById);
+
+        const createdElement = document.createElement("li");
+        createdElement.innerHTML = "Some text";
+        olElement.appendChild(createdElement);
+        console.log(createdElement);
+
+        const createdTextNode = document.createTextNode("SOMETHING");
+        const p = document.querySelector("p#toDoNotes");
+        p.appendChild(createdTextNode);
+
+        p.appendChild(document.createTextNode(" "));
+        const cloned = createdTextNode.cloneNode(true);
+        p.appendChild(cloned);
+
+
+        element.append(nodeElement);
+        element.appendChild(nodeElement);
+        element.prepend(nodeElement);
+
+        element.insertAdjacentElement(position, nodeElement);
+        // beforebegin
+        // afterbegin
+        // beforeend
+        // afterend
+
+
+        p.appendChild(document.createTextNode(" "));
+
+        const clonedx = createdTextNode.cloneNode(true);
+        document.insertBefore(clonedx, olElement);
+
+        //cloneAndPrint(olElement, document.querySelector("#toDoList li:nth-child(3)"), 1, "afterend");
+    })();
+
+    function cloneAndPrint(elementToClone, elementToAppend, times, position=undefined){
+        for (let i = 0; i < times; i++){
+            const clonedComplexElement = elementToClone.cloneNode(true);
+
+            if (!!position){
+                elementToAppend.insertAdjacentElement(position, clonedComplexElement);
+                continue;
+            }
+
+            elementToAppend.append(clonedComplexElement);
+        }
+    }
+</script>
+</body>
+</html>

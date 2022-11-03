@@ -1,0 +1,9 @@
+{
+  "name": "js_live",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "4.6.4"
+  }
+}

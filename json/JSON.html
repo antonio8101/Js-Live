@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Air Quality</h1>
+    <div class="card air-quality-item-container" style="width: 450px">
+        <div class="map">
+            <!--E' l'embed di google map -->
+        </div>
+        <div class="card-body">
+            <!-- title -->
+            <h4 class="card-title"></h4>
+
+            <!-- repeat foreach snapshot -->
+
+        </div>
+    </div>
+</div>
+<script type="module">
+    import {AirQualityData, getAirQualityDataLocation, getAirQualityDataSnapshot} from "./AirQualityModule.js";
+
+    let getAirQualityData = async function (url) {
+        //per andar a recuperar questa chiamata su questo url si usa il fetch
+        // ogni qualvolta maneggi una function che ritorni una promise puoi utilizzare await ma solo dentro una funzione async
+        // Puoi usare o than o async e await
+        const response = await fetch(url);
+        const status = response.ok;
+        if(status){
+            return await response.json(); //ogni volta che maneggi una promise devi aspettarla
+        }
+
+        throw new Error("Data not valid!");
+    }
+
+    getAirQualityData = async function (url){
+        const sensor_71551 = `[{"sampling_rate":null,"timestamp":"2022-05-12 15:13:55","sensordatavalues":[{"value":"31.92901611","value_type":"humidity","id":23206417439},{"value":"29.77455139","value_type":"temperature","id":23206417440}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"various","name":"DHT22","id":9},"pin":"7","id":71551},"id":10463301418},{"sampling_rate":null,"timestamp":"2022-05-12 15:12:49","sensordatavalues":[{"value":"31.70013428","value_type":"humidity","id":23206392829},{"value":"29.90272522","value_type":"temperature","id":23206392835}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"various","name":"DHT22","id":9},"pin":"7","id":71551},"id":10463290733},{"sampling_rate":null,"timestamp":"2022-05-12 15:11:43","sensordatavalues":[{"value":"33.68225098","value_type":"humidity","id":23206360597},{"value":"29.98817444","value_type":"temperature","id":23206360606}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"various","name":"DHT22","id":9},"pin":"7","id":71551},"id":10463276622},{"sampling_rate":null,"timestamp":"2022-05-12 15:10:36","sensordatavalues":[{"value":"32.18688965","value_type":"humidity","id":23206336592},{"value":"29.98817444","value_type":"temperature","id":23206336593}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"various","name":"DHT22","id":9},"pin":"7","id":71551},"id":10463266207},{"sampling_rate":null,"timestamp":"2022-05-12 15:09:30","sensordatavalues":[{"value":"32.45544434","value_type":"humidity","id":23206305787},{"value":"30.00152588","value_type":"temperature","id":23206305788}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"various","name":"DHT22","id":9},"pin":"7","id":71551},"id":10463252729}]`;
+        const sensor_71550 = `[{"sampling_rate":null,"timestamp":"2022-05-12 15:13:52","sensordatavalues":[{"value":"7.076297283","value_type":"P1","id":23206416175},{"value":"7.076297283","value_type":"P2","id":23206416178}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"Sensirion AG","name":"SPS30","id":37},"pin":"1","id":71550},"id":10463300870},{"sampling_rate":null,"timestamp":"2022-05-12 15:12:46","sensordatavalues":[{"value":"7.300321102","value_type":"P1","id":23206391063},{"value":"7.300321102","value_type":"P2","id":23206391090}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"Sensirion AG","name":"SPS30","id":37},"pin":"1","id":71550},"id":10463289960},{"sampling_rate":null,"timestamp":"2022-05-12 15:11:39","sensordatavalues":[{"value":"6.775090218","value_type":"P1","id":23206359834},{"value":"6.775090218","value_type":"P2","id":23206359835}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"Sensirion AG","name":"SPS30","id":37},"pin":"1","id":71550},"id":10463276303},{"sampling_rate":null,"timestamp":"2022-05-12 15:10:33","sensordatavalues":[{"value":"7.15973711","value_type":"P1","id":23206335444},{"value":"7.15973711","value_type":"P2","id":23206335464}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"Sensirion AG","name":"SPS30","id":37},"pin":"1","id":71550},"id":10463265703},{"sampling_rate":null,"timestamp":"2022-05-12 15:09:27","sensordatavalues":[{"value":"6.612581253","value_type":"P1","id":23206304384},{"value":"6.612581253","value_type":"P2","id":23206304397}],"location":{"exact_location":0,"country":"DE","latitude":"48.414","altitude":"504.0","longitude":"9.872","indoor":0,"id":59367},"sensor":{"sensor_type":{"manufacturer":"Sensirion AG","name":"SPS30","id":37},"pin":"1","id":71550},"id":10463252131}]`;
+
+        return new Promise((resolve, reject) => {
+            if (url.includes("71550")){
+                const p = JSON.parse(sensor_71550); // gli dai una stringa ritorna un oggetto e non ritorna una promise
+                resolve(p); // completa la promise e gli passa il suo risultato
+                return;
+            }
+
+            if (url.includes("71551")){
+                const p = JSON.parse(sensor_71551); // gli dai una stringa ritorna un oggetto
+                resolve(p);
+                return;
+            }
+
+            reject(new Error("Id not found"));
+        });
+    }
+
+    // in questo modo gli diamo le operazioni da far e l'array promises conterrà 2 promises in questo caso
+    const promises = [
+        getAirQualityData("https://data.sensor.community/airrohr/v1/sensor/71551/"),
+        getAirQualityData("https://data.sensor.community/airrohr/v1/sensor/71550/")
+    ];
+
+    //mi permette di aspettare un set di promises e finisce quando son arrivate tutte le promise
+    const p = Promise.all(promises);
+
+    p.then(mapToAirQualityData);
+
+    function mapToAirQualityData(promisesResult) {
+
+        const firstApiResponse = promisesResult[0];
+        const secondApiResponse = promisesResult[1];
+
+        const location = getAirQualityDataLocation(firstApiResponse[0].location);
+        const dataSnapshots = getAirQualityDataSnapshot(firstApiResponse, secondApiResponse);
+        const data = new AirQualityData(dataSnapshots, location);
+
+        showData(data);
+    }
+
+    function showData(data){
+
+        if (!(data instanceof AirQualityData)){
+            throw new Error("Wrong type");
+        }
+
+
+        // Mappa
+        const mapContainer = document.querySelector(".map");
+        const lat = data.location.lat;
+        const lng = data.location.lng;
+        mapContainer.innerHTML = getMap({width: 450, height: 250},lat, lng, 16);
+
+        // crea location name
+        const getLocation = (placeId, countryCode) => {
+
+            let city = "";
+            let country = "";
+
+            // todo : dovrebbe essere convertito da una function che ritorna il nome del posto sulla base del placeId
+            if (placeId == 59367)
+                city = "Arnegg";
+
+            // todo : dovrebbe essere convertito da una function che ritorna il nome del country sulla base del countryCode
+            if (countryCode === "DE")
+                country = "Germania";
+
+            return `${city} (${country})`;
+        };
+        const locationNameContainer = document.querySelector(".air-quality-item-container .card-title");
+        locationNameContainer.innerHTML = getLocation(data.location.placeId, data.location.country);
+
+        // crea un snapshot-data per ogni snapshot
+        const snapShotsContainer = document.querySelector(".air-quality-item-container .card-body")
+        data.dataSnapshots.forEach((snapshot) => {
+            const snapshotElement = getSnapshot(snapshot);
+            snapShotsContainer.appendChild(snapshotElement);
+        })
+        console.log(data.dataSnapshots.length);
+    }
+
+    function getMap({width = 450, height = 250}, lat, lng, zoom = 18){
+        const key = "AIzaSyDiCScNSVT8dlgU-o8Iu0oxPTbs9Q4x9PM";
+        return `<iframe
+                    width="${width}"
+                    height="${height}"
+                    frameborder="0"
+                    style="border:0"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/view?key=${key}&center=${lat},${lng}&zoom=${zoom}&maptype=satellite"
+                    allowfullscreen>
+                </iframe>`;
+    }
+
+    function getSnapshot(snapshot) {
+        const snapshotElement = document.createElement("div");
+        snapshotElement.className = "snapshot-data card mt-3";
+
+        const snapshotValues = snapshot.values.map(v => {
+            let value = "0";
+            let type = "";
+
+            switch (v.value_type) {
+                case "humidity":
+                    type = "Umidità";
+                    value = `${Math.round(v.value)}%`;
+                    break;
+                case "temperature":
+                    type = "Temperatura";
+                    value = `${Math.round(v.value)}°C`;
+                    break;
+                case "P1":
+                    type = "PM 10";
+                    value = `${v.value}`;
+                    break;
+                case "P2":
+                    type = "PM 25";
+                    value = `${v.value}`;
+                    break;
+            }
+
+
+            return `<li class="list-group-item d-flex">
+                        <div style="width: 100px">${type}:</div>
+                        <div>${value}</div>
+                    </li>`;
+        }).reduce((c, p) => c + p);
+
+        const dt = new Date(snapshot.timestamp);
+
+        const content = `
+                <ul class="b-1 list-group list-group-flush">
+                    ${snapshotValues}
+                </ul>
+                <div class="card-body" style="text-align: right">
+                    <strong>${dt.toLocaleDateString('it-IT')} ${dt.toLocaleTimeString('it-IT')}</strong>
+                </div>
+            `;
+
+        snapshotElement.innerHTML = content;
+        return snapshotElement;
+    }
+
+</script>
+</body>
+</html>

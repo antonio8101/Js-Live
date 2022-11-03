@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS_TOUR</title>
+</head>
+<body>
+
+<script>
+
+    /*
+    Esercizio1
+
+
+      Somma e media
+      Scrivi un programma che dati 5 numeri restituisca in output la somma e la media.
+
+      Esempio:
+        Input: a = 1, b = 2, c = 3, d = 4, e = 5
+        Output: somma = 15, media = 3
+
+    */
+
+    var a, b, c, d, e;
+
+    a = 1;
+    b = 2;
+    c = 3;
+    d = 4;
+    e = 5;
+
+    var risultatoSomma = a + b + c + d + e;
+    var risultatoMedia = risultatoSomma / 5;
+
+    var risultatoEsercizio1 = "Dati 5 valori:\na=" + a + ", b=" + b + ", c=" + c + ", d=" + d + ", e=" + e + "\n\n"
+        + "La somma è " + risultatoSomma + "\n"
+        + "Il tipo della somma è " + typeof risultatoSomma + "\n"
+        + "La media è " + risultatoMedia + "\n"
+        + "Il tipo della media è " + typeof risultatoMedia;
+
+</script>
+<script>
+    /*
+    Esercizio 2
+
+      Quanti anni ha?
+      Scrivi un programma che dato l'anno corrente e un anno di nascita determini:
+        - l'età della persona,
+        - quanti anni sono necessari per raggiungere i 100
+      Restituisca in output entrambi i risultati.
+
+      Esempio:
+        Input: anno corrente = 2018, anno di nascita = 1991
+        Ouput: età = 27, anni mancanti = 73
+    */
+
+    var currentYear = 2018;
+    var bornYear = 1991;
+
+    var age = currentYear - bornYear;
+    var ageDistance = 100 - age;
+
+    var resultEsercizio2 = "età = " + age + ", anni mancanti = " + ageDistance;
+
+    //console.log(result);
+
+</script>
+<script>
+    /*
+
+    Esercizio3
+
+  Gatti in fila
+  Scrivi un programma che dato:
+    a) Un numero totale di gatti
+    b) Il numero dei gatti presenti in ogni fila
+  Restituisca in output:
+    - Il numero di file risultanti
+    - Nel caso l'ultima fila risulti incompleta indicare il numero di gatti mancanti per completarla (quanti gatti mancano per arrivare a b?)
+
+  Esempio:
+    Input: numero di gatti = 44, gatti per fila = 6
+    Output: numero di file = 8, gatti mancanti = 4
+
+  Consigli:
+  Per l'arrotondamento ti consiglio di non usare Math.round (arrotonda all'intero superiore solo da .5 in su),
+  utilizza Math.ceil (arrotonda sempre all'intero superiore).
+*/
+
+    let cats = 44;
+    let catsPerRow = 6;
+    var rowNumber = cats / catsPerRow;
+    var roundedRowNumber = Math.ceil(rowNumber);
+    var remainder = cats % catsPerRow;
+    var missing = catsPerRow - remainder;
+
+    var resultEsercizio3 = "numero di file = " + roundedRowNumber + ", gatti mancanti = " + missing;
+</script>
+<script>
+    /*
+      Conta il tempo
+      Scrivi un programma che dato un numero di secondi, calcoli la quantità di ore, minuti e secondi corrispondenti e
+      poi stampi il risultato. L'output avrà solo numeri interi.
+
+      Esempio:
+        Input: 12560
+        Output: 3 ore, 29 minuti e 20 secondi.
+
+      Consigli:
+      In un'ora ci sono 60 minuti, in un minuto 60 secondi. Quindi quanti secondi ci sono in un'ora? ;)
+    */
+
+    var h, m, s;
+
+    var inputSeconds = 12560;
+    var secondsMinute = 60;
+    var secondsHour = 60 * secondsMinute;
+
+    console.log(inputSeconds % secondsHour)
+    console.log(inputSeconds % secondsHour % secondsMinute)
+
+    h = Math.floor(inputSeconds / secondsHour);
+    m = Math.floor(inputSeconds % secondsHour / secondsMinute);
+    s = inputSeconds % secondsHour % secondsMinute;
+
+    let result = h + " or" + (h === 1 ? "a" : "e") + ", " +
+        m + " minut" + (m === 1 ? "o" : "i") + " e " +
+        s + " second" + (s === 1 ? "o" : "i") + ".";
+
+    console.log(result)
+
+</script>
+<script>
+
+    switch (color) {
+        case "red":
+            message = "stop"
+            messagey = "yyy";
+            break;
+        case "yellow":
+        case "blue":
+        case "purple":
+        case "magenta":
+        case "black":
+            message = "alert"
+            break;
+        case "green":
+            message = "go"
+            break;
+        default:
+            throw Error("colore non gestito")
+    }
+</script>
+<script>
+
+    var counter = 0;
+    while (counter < 10){
+        console.log("I'm waiting");
+
+        counter++;
+    }
+
+
+
+    for (var i=0; i<10; i++){
+        console.log("I'm waiting dal for");
+    }
+
+    var arr = [0, 1, 2, 3, 4];
+    for (var i=0; i < arr.length; i++){
+        console.log("I'm waiting dal for " + arr[i] );
+    }
+
+    // for .. of on Array
+    for (var d of arr){
+        console.log("I'm waiting dal for in " + d );
+    }
+
+    // for .. in on Object (like)
+    var obj = { a:0, b:1, c:2 }
+    for (var d in obj){
+        console.log(d);
+        console.log("I'm waiting dal for of " + obj[d] );
+    }
+
+</script>
+<script>
+/*
+  Caldo o freddo
+  Scrivi un programma che dati tre valori relativi alle temperature della settimana
+  stabilisca la giornata più calda e quella più fredda.
+
+  Esempio:
+    Input: a = 30, b = -2
+    Output: giornata più calda = 30, giornata più fredda = -2
+*/
+
+var a = 5;
+var b = -2;
+var c = 10;
+
+var caldo = 0;
+var freddo = 0;
+
+// if (a >= b && b >= c){
+//     caldo = a;
+// } else if (b >= a && a >= c){
+//     caldo = b;
+// } else {
+//     caldo = c;
+// }
+
+if (a >= b && a >= c){
+    caldo = a;
+    freddo = b < c ? b : c; // confronto ternario
+} else if(a < b && a < c){
+    caldo = b > c ? b : c; // confronto ternario
+    freddo = a;
+} else {
+    freddo = b < a ? b : a; // confronto ternario
+    caldo = c;
+}
+
+if (a >= b && a >= c){
+    caldo = a;
+    freddo = b < c ? b : c; // confronto ternario
+} else if(b >= a && b >= c){
+    caldo = b;
+    freddo = a < c ? a : c; // confronto ternario
+} else {
+    caldo = c;
+    freddo = b < a ? b : a; // confronto ternario
+}
+
+var resultCaldoFreddo = "giornata più calda = " + caldo + ", giornata più fredda = " + freddo;
+//console.log(resultCaldoFreddo);
+
+</script>
+<script>
+/*
+  Il conta cifre
+  Scrivi un programma che dato un numero (massimo 9999) conti da quante cifre è formato.
+
+  Esempi:
+    Input: numero = 9
+    Output: 1 cifra
+
+    Input: numero = 245
+    Output: 3 cifre
+*/
+</script>
+<script>
+/*
+  Fai il professore
+  Scrivi un programma che converta un voto numerico (v) in un giudizio seguendo questi parametri:
+    v < 18: insufficiente
+    18 <= v < 21: sufficiente
+    21 <= v < 24: buono
+    24 <= v < 27: distinto
+    27 <= v <= 29: ottimo
+    v = 30: eccellente
+  Utilizza costrutto If.
+
+  Esempio:
+    Input: v = 29
+    Output: Distinto
+
+  Variante
+  Realizzare una versione con il costrutto Switch-Case. In questo caso gestire anche
+  il caso in cui il voto inserito non sia valido.
+*/
+</script>
+<script>
+
+    var lion = {
+        Roar: function () {
+            //
+        },
+        Color: "orange",
+        get accessorColor() {
+            return this.Color + "blu";
+        },
+        set accessorColor(color) {
+            return this.Color = color + "purple";
+        }
+    };
+    var cat = {
+        Roar: function () {
+            //
+        }
+    };
+
+    console.log(lion);
+    console.log(cat);
+
+    var animal = {
+        Breathe: function (){
+            //....
+        },
+        birthDate: new Date()
+    }
+
+    var felini = {
+        Type : "Mammifero",
+        Run : function () {
+
+        },
+        Assault : function () {
+
+        },
+    }
+
+    function addFeatures() {
+
+        Object.setPrototypeOf(felini, animal);
+        Object.setPrototypeOf(lion, felini);
+        Object.setPrototypeOf(cat, felini);
+
+        console.log(lion)
+        console.log(cat)
+    }
+
+    function changeSomething(){
+        cat.Assault = false;
+
+        console.log(lion)
+        console.log(cat)
+    }
+
+    function changeSomethingElse(){
+       delete felini.Assault;
+
+        console.log(lion)
+        console.log(cat)
+    }
+
+
+
+
+
+
+</script>
+<script>
+    /*
+    scrivi un programma che dato un numero (massimo 9999) conti da quante cifre è formato
+
+    esempi:
+    Input: numero = 9
+    Output: 1 cifra
+     Input: numero = 245
+    Output: 3 cifre
+*/
+    function getDigit(number){
+        var a = 10;
+        var b = 100;
+        var c = 1000;
+        var d = 1;
+        var e = 2;
+        var f = 3;
+        var g = 4;
+        var h = 5;
+
+        var numero = number
+        var quantitacifre = 0;
+
+
+        if ( numero < a || numero >= a ){
+            quantitacifre = numero < a ? d : c && numero >= a ? e : f;
+        }if ( numero >= b ){
+            quantitacifre = numero >= b ? f : g;
+        }if (numero >= c ){
+            quantitacifre = numero >= c ? g : h;
+        }
+
+        var result = "numero " + numero + ", quantità cifr" + ( numero === 1,2,3,4,5,6,7,8,9 ? "a " : "e ") + quantitacifre ;
+        console.log(result)
+    }
+
+
+</script>
+<script>
+    function Car(name, manufacturer){
+        this.name = name;
+        this.manufacturer = manufacturer;
+        maxSpeed = 100;
+        this.getMaxSpeed = function () {
+            return maxSpeed;
+        }
+    }
+    //
+    Car.prototype = null;
+
+    Object.prototype.sayThis = function(t){
+        return t;
+    }
+
+    var car1 = {name: "Fiesta", manufacturer: "Ford"};
+    var car2 = {name: "Panda", manufacturer: "Fiat"};
+    var car3 = new Car("ModelY", "Tesla");
+    car3.name = "mmm";
+    car3.manufacturer = "fflflfl";
+    car3.seggiolini
+
+
+
+
+    car3.year = 2018;
+    //Object.setPrototypeOf(car3, null);
+
+    var car4 = Object.create(null);
+    console.log(car4);
+
+    var car5 = {};
+
+    Array.prototype.eraseAll = function (){
+        return [];
+    }
+
+    var arr = [1, 2];
+    arr.eraseAll();
+
+    // Object.prototype.sayThis = "testo"; -- tutti gli eredi
+    // Car.sayThis = "testo"; // tutti quelli che vengono da car sono impattati
+    // car5.sayThis = "testo"; // solo l'istanza car5 è impattata
+
+</script>
+<script>
+
+    class Card {
+        constructor(face, suit) {
+
+            this.face = getFace(face);
+
+            this.suit = getSuit(suit);
+
+            // internal functions
+
+            function getSuit(suit) {
+
+                switch (suit) {
+                    case 0:
+                        return "Cuori";
+                    case 1:
+                        return "Fiori";
+                    case 2:
+                        return "Quadri";
+                    case 3:
+                        return "Picche";
+                    default:
+                        throw new Error("Argument out of range");
+                }
+            }
+
+            function getFace(face) {
+
+                if ((face < 0 || face > 9) || Number.isInteger(face) === false)
+                    throw new Error("Argument out of range");
+
+                switch (face) {
+                    case 0:
+                        return "Asso";
+                    case 9:
+                        return "Re";
+                    default:
+                        return (face + 1).toString();
+                }
+            }
+        }
+    }
+    class CardDeck {
+        constructor() {
+        }
+
+        shuffle() {
+            var face = Math.round(Math.random() * 9);
+            var suit = Math.round(Math.random() * 3);
+
+            return new Card(face, suit);
+        }
+    }
+
+    var cardDeck = new CardDeck();
+
+    console.log(cardDeck);
+    console.log(cardDeck.shuffle());
+
+    Object.prototype.getYesterday = function () {
+        var d = new Date();
+        d.setDate(d.getDate()-1);
+        return d.getDay();
+    }
+
+</script>
+<script>
+       /*
+  Operazioni tra array
+  Scrivi un programma che dati:
+  - 2 array di 10 elementi interi casuali compresi tra 1 e 10,
+  - il tipo di operazione aritmetica da effettuare, una delle seguenti:
+    addizione
+    sottrazione
+    moltiplicazione
+    divisione
+  Esegua il calcolo tra ogni elemento dei due array, salvando ciascun risultato in un terzo array di appoggio.
+
+  Esempio:
+    Input: a = [3, 7, 2, 5, 8, 1, 2, 5, 6, 4], b = [9, 3, 1, 4, 7, 6, 5, 10, 1, 5], operazione = "addizione"
+    Output: c = [12, 10, 3, 9, 15, 7, 7, 15, 7, 9]
+
+  Consigli:
+  Se non ricordi come generare un numero random e come convertirlo nel tuo intervallo riguarda l'esercizio sulle condizioni "Chi l'azzecca?".
+
+  //  -> map(function (e) { return e + 1; })
+  // forEach
+*/
+
+    function operazioniTraArray(array1, array2, operazione) {
+
+        return [];
+    }
+
+
+
+
+</script>
+</body>
+</html>

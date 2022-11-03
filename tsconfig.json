@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "outDir": "./ts/dist" /* Imposta la cartella nel quale verranno salvati i file JS compilati. */,
+    "rootDir": "./" /* Specifica la cartella di root dei file di input. */,
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": [
+    "ts/"
+  ],
+  "exclude": [
+    "node_modules",
+    "./ts/dist"
+  ]
+}

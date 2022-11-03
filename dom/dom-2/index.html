@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-2</title>
+</head>
+<body>
+<div id="id-1">
+    <p id="param-1">Welcome to my web page.</p>
+    <p id="param-2">Please take a look around.</p>
+    <input id="btn" value="Replace Element" type="button"/>
+</div>
+<script>
+function onClickEventHandler(e) {
+    const targetClicked = e.target;
+    targetClicked.disabled = true;
+    const elm = document.getElementById("param-1");
+    elm.innerHTML = "<h2>"+"Welcome"+"</h2>";
+}
+
+function triggerClickEvent() {
+    console.log("clicked");
+    const elm = document.getElementById("btn");
+    elm.click();
+}
+
+const btn = document.getElementById("btn");
+btn.addEventListener("click", onClickEventHandler);
+</script>
+</body>
+</html>

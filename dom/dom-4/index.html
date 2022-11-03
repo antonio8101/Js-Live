@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS_DOM5</title>
+</head>
+<body>
+<h1>The Extremadura Region of Western Spain</h1>
+<article id="item-1">
+    <h2>Geography Of The Region</h2>
+    <p>The autonomous community of Extremadura is in western Spain alongside the
+        Portuguese border. It borders the Spanish regions of Castilla y Leon, Castilla La
+        Mancha and Andalucía as well as Portugal (to the West). Covering over 40,000 square
+        kilometers it has two provinces: Cáceres in the North and Badajoz in the South.</p>
+</article>
+<article id="item-2">
+    <h2>Where To Stay</h2>
+    <p>There is a wide range of accommodation throughout Extremadura including
+        small inns and guest houses ('Hostals') or think about renting a 'casa rural'
+        (country house)if you are traveling in a group.</p>
+</article>
+<article id="item-3">
+    <h2>Climate</h2>
+    <p>Generally Mediterranean, except for the north, where it is continental.
+        Generally known for its extremes, including very hot and dry summers with frequent
+        droughts, and its long and mild winters.</p>
+</article>
+<article id="item-4">
+    <h2>What To See</h2>
+    <p>Extremadura hosts major events all year round including theater, music,
+        cinema, literature and folklore. Spectacular venues include castles, medieval town
+        squares and historic centers. There are special summer theater festivals in the
+        Mérida, Cáceres, Alcántara and Alburquerque.</p>
+</article>
+<article id="item-5">
+    <h2>Gastronomy</h2>
+    <p>The quality of Extremaduran food arises from the fine quality of the local
+        ingredients. In addition to free-range lamb and beef, fabulous cheeses, red and
+        white wines, olive oil, honey and paprika, Extremadura is particularly renowned for
+        Iberian ham. The 'pata negra' (blackfoot) pigs are fed on acorns in the cork-oak
+        forests, the key to producing the world's best ham and cured sausages.</p>
+</article>
+<script>
+
+    function getTitlesFromArticles(list) {
+        const articleTitles = [];
+        for (let i = 0; i < list.length; i++) {
+            console.log(list.item(i).innerHTML);
+            articleTitles.push(list.item(i).innerHTML);
+        }
+        return articleTitles;
+    }
+
+    function createAnchor(title, order){
+        const elementA = document.createElement("a");
+        elementA.style.color = "red";
+        elementA.innerHTML = title;
+        elementA.setAttribute("href", "#item-"+ order);
+        elementA.setAttribute("target", "_self");
+        return elementA;
+    }
+
+    (function (){
+        const articleTitles = getTitlesFromArticles(document.querySelectorAll("article > h2"));
+        const bodyElement = document.querySelector("body");
+        const elementUl = document.createElement("ul");
+
+
+
+        if (bodyElement instanceof HTMLBodyElement){
+
+            bodyElement.style = "background-color: red";
+
+            bodyElement.prepend(elementUl);
+
+            for(let i = 0; i < articleTitles.length; i++){
+                const element = document.createElement("li");
+                const elementA = createAnchor(articleTitles[i], i+1);
+                element.append(elementA);
+                elementUl.append(element);
+            }
+        }
+
+        /*
+        const liList = document.getElementsByTagName("li");
+        for (let i = 0; i < liList.length; i++){
+            const elementA = document.createElement("a");
+            elementA.style.color = "red";
+            liList[i].append(elementA);
+            elementA.innerHTML = articleTitles[i];
+        }
+
+        const aList = document.getElementsByTagName("a");
+        for (let i = 0; i < aList.length; i++){
+            aList[i].setAttribute("href", "#item-"+[i+1]);
+            aList[i].setAttribute("target", "_self");
+        }
+        */
+
+        // per ciascun article dobbiamo creare un elemento di <li><a href="#">{title}</a></li>
+        // prependere gli elementi come [primo] figlio del tag body
+        // gli elementi <li> devono essere a loro volta inclusi in un element <ul>
+        // passo successivo, dovete aggiungere anche l'attributo "id" nell'attributo href...
+        // articletitles può tornare una lista di object invece???
+
+        // console.log(articleTitles);
+
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+<style>
+    .exercise-display{
+        background-color: #cacaca;
+        border:solid 1px #808080;
+        padding: 10px;
+        overflow: hidden;
+    }
+    p{
+        margin: unset;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="exercise-display my-3">
+
+    </div>
+</div>
+<script>
+    const image = 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Eagle_nebula_pillars.jpg';
+    const promise = fetch(image);
+    const promise1 = fetch(image);
+
+    // fetch(image).then(r => r);
+    // promise.then(r => r);
+
+    console.log(promise);
+
+    const LoadingEffect = function(elmDisplay, operation) {
+
+        const p = document.createElement("p");
+        p.setAttribute("class", "loading-effect");
+        p.innerHTML = `attendere ${operation}`;
+
+        this.start = () => {
+            elmDisplay.append(p);
+            this.interval = setInterval(() => {
+                p.innerHTML += ".";
+            }, 10);
+        }
+        this.unset = () => {
+            elmDisplay.removeChild(p);
+            clearInterval(this.interval);
+        }
+    }
+
+    const div = document.querySelector(".exercise-display");
+    const loadingEffect = new LoadingEffect(div, "scaricamento in corso");
+    const blobLoadingEffect = new LoadingEffect(div, "lettura in corso");
+    loadingEffect.start();
+
+    // PROMISE
+    promise
+        .then((response) => {
+            // DOPO LA FINE DELLA CHIAMATA...
+
+            console.log(response);
+
+            if(response.status !== 200){
+                throw new Error("response ko");
+            }
+            let p = document.createElement("p");
+            p.innerHTML = `HTTP status code: ${response.status}`;
+            div.append(p);
+
+            loadingEffect.unset();
+
+            const blob = response.blob();
+
+            blobLoadingEffect.start();
+
+            return blob;
+        })
+        .then((blob) => {
+
+            // DOPO LA FINE DELLA LETTURA DELLO STREAM IN UN BLOB
+
+            const imageObjectURL = URL.createObjectURL(blob);
+            const imageElm = document.createElement("img");
+            div.append(imageElm);
+            imageElm.src = imageObjectURL;
+            blobLoadingEffect.unset();
+        })
+        .catch((error) => {
+
+            // IN CASO DI ERRORE DI OGNI PROMISE
+
+            alert(error.message);
+            loadingEffect.unset();
+            blobLoadingEffect.unset();
+        })
+        .finally(() => {
+            // ALLA FINE..
+        });
+
+    //
+
+</script>
+<script>
+    const url = [];
+
+    const promises = url.slice(10, 20).map(u => {
+        return fetch(u).then(r => r.text());
+    });
+
+    Promise.all(promises).then(texts => {
+        texts.forEach(t => {
+            console.log(t);
+        })
+    });
+</script>
+</body>
+</html>

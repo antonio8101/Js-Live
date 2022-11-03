@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BasicDom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="my-element">
+    <ul>
+        <li>item2 </li>
+        <li>item2 </li>
+        <li>item1 </li>
+        <li>item1 </li>
+    </ul>
+</div>
+<div id="my-element-2">
+    Antonio
+</div>
+<script>
+    let elm = undefined;
+
+    (function () {
+        elm = document.getElementById("my-element");
+
+        const t1 = setTimeout(() => {
+            const elm2 = document.getElementById("my-element-2");
+            elm2.innerHTML = "Manuel";
+            clearTimeout(t1);
+        }, 2500);
+        const t2 = setTimeout(() => {
+            let i = 0;
+            const intval = setInterval(()=>{
+                console.log(i)
+                elm.innerHTML = "<h1>"+"HelloWorld! " + i +  "</h1>";
+                i++;
+                if (i > 10)
+                    clearInterval(intval)
+            }, 500);
+
+
+            console.log(intval);
+            clearTimeout(t2);
+
+        }, 1000);
+         setTimeout(() => {
+            window.location.reload();
+        }, 5000);
+
+
+
+    })();
+
+    console.log(elm.innerHTML);
+</script>
+</body>
+</html>
